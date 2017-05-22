@@ -1,5 +1,5 @@
 const db = require('../models/database');
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const userController = {};
 // require user model here later
@@ -10,7 +10,7 @@ const userController = {};
 //verify that username exists in users table
 //verify that password matches
 userController.verifyUser = (req, res, next) => {
-    let username = req.body.username;
+     let username = req.body.username;
     let password = req.body.password;
     if (!username || !password) res.send('Please, enter username AND password');
     else {
