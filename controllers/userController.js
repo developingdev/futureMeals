@@ -1,4 +1,5 @@
 const db = require('../models/database');
+var bcrypt = require('bcrypt');
 
 const userController = {};
 // require user model here later
@@ -18,14 +19,16 @@ userController.verifyUser = (req, res, next) => {
                 if (error) res.send(error);
                 else if (!result.rows.length) res.status(400).send('no username found');
                 else {
-                    if (password === result.rows[0].password) {
-                        res.status(200).send('password matches');
-                    }
-                    else {
-                        res.status(400).send('wrong password');
-                    }
-            }
-        });
+                    bcrypt.compare(password, result.rows[0].password).then(function (isSame) {
+                        if (isSame) {
+                            res.status(200).send('password matches');
+                        }
+                        else {
+                            res.status(400).send('wrong password');
+                        }
+                    });
+                }
+            });
     }
 }
 
@@ -49,18 +52,26 @@ userController.addToUsersTable = (req, res, next) => {
     let healthlabel = '';
     //yeah Alyssa did this. goodluck figuring out why. sorrynotsorry
     if (req.body.healthlabel) {
-        healthlabel = req.body.healthlabel.reduce((res, curr, i) => { 
+        healthlabel = req.body.healthlabel.reduce((res, curr, i) => {
             res += curr;
-            if(i<req.body.healthlabel.length-1) res += ', ';
+            if (i < req.body.healthlabel.length - 1) res += ', ';
             return res;
-        },'');
+        }, '');
     }
-    db.conn.query(`INSERT INTO users ("username", "password", "healthlabel")
-                   VALUES ('${username}', '${password}', ARRAY['${healthlabel}']);`,
-                   (error, result) => {
-                       if(error) res.status(400).send(error);
-                       else next();
-                   });
+
+    bcrypt.hash(password, 10).then(function (hash) {
+        // Store hash in your password DB. 
+        console.log('Orignal PW: ', password);
+        console.log('Encrypted PW: ', hash);
+        db.conn.query(`INSERT INTO users ("username", "password", "healthlabel")
+                   VALUES ('${username}', '${hash}', ARRAY['${healthlabel}']);`,
+            (error, result) => {
+                if (error) res.status(400).send(error);
+                else next();
+            });
+    });
+
+
 }
 
 //POST REQUEST FROM SIGNUP (CONTINUED):
