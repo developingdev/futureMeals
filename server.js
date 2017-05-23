@@ -14,6 +14,7 @@ app.post('/signup', userController.checkIfUsernameExists,
                     userController.addToUsersTable, 
                     userController.createUserTable);
 app.post('/recipeDisplay', recipeController.saveRecipe);
+app.post('/delete', recipeController.deleteRecipe);
 app.get('/day/:day/:username', dayController.getRowsForDay);//req.params.day /monday/doug
 
 app.listen(3000);
