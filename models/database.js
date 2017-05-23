@@ -1,4 +1,5 @@
 const pg = require('pg');
+
 const Sequelize = require('sequelize');
 // const sequelize = new Sequelize('futuremeals', 'aoh89', 'password', {
 //     host: 'localhost',
@@ -12,7 +13,8 @@ const Sequelize = require('sequelize');
 
 // const db = {};
 
-const uri = 'postgres://@localhost/futuremeals';
+
+const uri = 'postgres://localhost/futuremeals';
 
 const sequelize = new Sequelize(uri);
 

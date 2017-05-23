@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 
 class Login extends Component {
   constructor(props) {
@@ -14,14 +12,26 @@ class Login extends Component {
           <h1>Recipe Generator</h1>
         </div>
         <form onSubmit={this.props.handleLoginSubmit}>
-          <input placeholder="Username" type="text" name="username" value={this.props.username} onChange={this.props.handleChange} />
-          <input placeholder="Password" type="password" name="password" value={this.props.password} onChange={this.props.handleChange} />
+          <input
+            placeholder="Username"
+            type="text"
+            name="username"
+            value={this.props.username}
+            onChange={this.props.handleChange}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            name="password"
+            value={this.props.password}
+            onChange={this.props.handleChange}
+          />
           <Link to="/search" onClick={this.props.handleLoginSubmit}>Login</Link>
         </form>
         <p>Don't have an account?</p>
         <Link to="/signup">Signup</Link>
       </div>
-    )
+    );
   }
 }
 
