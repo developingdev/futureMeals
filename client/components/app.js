@@ -16,6 +16,7 @@ class App extends Component {
     this.handleProfileClick = this.handleProfileClick.bind(this);
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.handleRecipeRender = this.handleRecipeRender.bind(this);
+    this.uhh = context;
     this.state = {
       0: true,
       1: false,

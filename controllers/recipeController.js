@@ -10,9 +10,9 @@ recipeController.saveRecipe = (req, res, next) => {
     let day = req.body.day;
     let username = req.body.username;
     let recipe = req.body.recipe.recipe;
-    // console.log(recipe)
-    if (!day || !username || !recipe) res.status(400).send('please send day username AND recipe');
-    else {
+    console.log(recipe)
+    if(!day || !username || !recipe) res.status(400).send('please send day username AND recipe');
+    else{
         console.log('in saveRecipe have day username and recipe');
         let label = recipe.label;
         let image = recipe.image;
@@ -23,25 +23,11 @@ recipeController.saveRecipe = (req, res, next) => {
         // console.log(label)
         db.conn.query(`INSERT INTO ${username} ("day", "label", "image", "url", "yield", "healthLabels", "ingredientLines")
                        VALUES ('${day}', '${label}', '${image}', '${url}', '${_yield}', ARRAY['${healthLabels}'], ARRAY['${ingredientLines}']);`,
-            (error, result) => {
-                if (error) res.status(400).send(error);
-                else res.status(200).send(`saved to table ${username}`);
-            });
+                   (error, result) => {
+                       if(error) res.status(400).send(error);
+                       else res.status(200).send(`saved to table ${username}`);
+                   });
     }
 }
 
-recipeController.deleteRecipe = (req, res, next) => {
-    console.log("IN DELETE RECIPE!!!!!");
-    let day = req.body.day;
-    let username = req.body.username;
-    db.conn.query(`DELETE FROM ${username} WHERE day='${day}';`,
-        (err, result) => {
-            if (err) return new Error(err);
-            else {
-                console.log("NOT ERROR")
-                res.send(result);
-            }
-        }
-    );
-}
 module.exports = recipeController;
