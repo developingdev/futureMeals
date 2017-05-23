@@ -65,7 +65,10 @@ userController.addToUsersTable = (req, res, next) => {
     db.conn.query(`INSERT INTO users ("username", "password", "healthlabel")
                    VALUES ('${username}', '${hash}', ARRAY['${healthlabel}']);`,
       (error, result) => {
-        if (error) res.status(400).send(error);
+        console.log(error)
+        console.log(result)
+        if (error){ res.status(400).send(error); console.log("TWO")}
+
         else next();
       });
   });
@@ -75,6 +78,7 @@ userController.addToUsersTable = (req, res, next) => {
 // create table for each new user when they sign up
 userController.createUserTable = (req, res, next) => {
   const username = req.body.username;
+  console.log("IN CREATE TABLE");
   db.conn.query(`CREATE TABLE ${username} (
                     "_id" SERIAL PRIMARY KEY NOT NULL,
                     "day" TEXT,

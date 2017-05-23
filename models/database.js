@@ -2,7 +2,7 @@ const pg = require('pg');
 
 const db = {};
 
-const uri = 'postgres://@localhost/futuremeals';
+const uri = 'postgres://aoh89:password@localhost/futuremeals';
 
 
 pg.connect(uri, (error, db_) => {
