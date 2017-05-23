@@ -7,7 +7,7 @@ import Profile from './profile';
 import RecipeDisplay from './recipeDisplay';
 
 class App extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -15,6 +15,7 @@ class App extends Component {
     this.handleProfileClick = this.handleProfileClick.bind(this);
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.handleRecipeRender = this.handleRecipeRender.bind(this);
+    this.context = context;
     this.state = {
       0: true,
       1: false,
@@ -60,8 +61,10 @@ class App extends Component {
     axios.post('/login', { username: this.state.username, password: this.state.password })
       .then((response) => {
         console.log('login succesful!');
-        this.setState({ 0: false, 1: false, 2: true, 3: false });
+        // this.setState({ 0: false, 1: false, 2: true, 3: false });
         // this.handleRecipeRender();
+        this.setState({ isAuthenticated: true });
+        this.context.router.transitionTo('/search');
       })
       .catch(err => {
         console.log(err);
@@ -138,5 +141,8 @@ class App extends Component {
   }
 }
 
+App.contextTypes = {
+  router: React.PropTypes.object,
+};
 
 module.exports = App;
