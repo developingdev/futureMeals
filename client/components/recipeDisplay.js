@@ -43,6 +43,8 @@ class RecipeDisplay extends Component {
     let recipes = this.state.recipes.map((curr, i) => {
       return <Recipe recipedata={curr} username={this.props.username} key={i} />
     })
+
+    console.log('in recipe display')
     // const ingredients = this.props.recipeData.ingredientLines[0].split(/,|;/g).map((ingredient, index) => {
     //   console.log(ingredient)
     //   return <li>{ingredient}</li>
