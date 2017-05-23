@@ -14,7 +14,7 @@ const Sequelize = require('sequelize');
 // const db = {};
 
 
-const uri = 'postgres://localhost/futuremeals';
+const uri = 'postgres://yvggemra:1lNb7oKhWZtGLc39iprwZZksFvKN3IZr@hard-plum.db.elephantsql.com:5432/yvggemra';
 
 const sequelize = new Sequelize(uri);
 
