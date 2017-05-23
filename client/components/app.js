@@ -11,12 +11,8 @@ class App extends Component {
     super(props);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
-<<<<<<< HEAD
     this.handleChange = this.handleChange.bind(this);
-=======
-    this.handleRecipeRender = this.handleRecipeRender.bind(this);
-    this.uhh = context;
->>>>>>> da4fc19cc48e8db1c50aa329fd93fcc8d7c5048f
+
     this.state = {
       username: '',
       password: '',

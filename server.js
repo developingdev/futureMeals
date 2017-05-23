@@ -22,11 +22,9 @@ app.post('/signup', cookieController.setCookie,
                     userController.addToUsersTable,
                     userController.createUserTable);
 app.post('/recipeDisplay', recipeController.saveRecipe);
-<<<<<<< HEAD
 app.post('/delete', recipeController.deleteRecipe);
 app.get('/search', apiController.find);
-=======
->>>>>>> da4fc19cc48e8db1c50aa329fd93fcc8d7c5048f
+
 app.get('/day/:day/:username', dayController.getRowsForDay);//req.params.day /monday/doug
 
 app.listen(3000);
