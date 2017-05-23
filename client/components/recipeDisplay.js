@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Recipe from './recipe.js';
 import Profile from './profile.js';
-
+import { Link } from 'react-router-dom';
 
 class RecipeDisplay extends Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class RecipeDisplay extends Component {
       return <Recipe recipedata={curr} username={this.props.username} key={i} />
     })
 
+    console.log('in recipe display')
     // const ingredients = this.props.recipeData.ingredientLines[0].split(/,|;/g).map((ingredient, index) => {
     //   console.log(ingredient)
     //   return <li>{ingredient}</li>
@@ -54,9 +55,9 @@ class RecipeDisplay extends Component {
         <h1>Search for a Recipe</h1>
         <form onSubmit={this.handleSearchSubmit}>
           <input placeholder="Search" type="text" name="q" value={this.state.q} onChange={this.handleRecipeChange} />
-          <input type="submit" value="submit" />
+          <Link to="/search" onClick={this.handleSearchSubmit}>Submit</Link>
         </form>
-        <button onClick={this.props.handleProfileClick}>Profile</button>
+        <Link to="/profile" onClick={this.props.handleProfileClick}>Profile</Link>
         {recipes}
       </div>
     )

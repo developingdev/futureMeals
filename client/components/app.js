@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Login from './login';
 import Signup from './signup';
 import Profile from './profile';
 import RecipeDisplay from './recipeDisplay';
+import { createBrowserHistory } from 'history';
 
 class App extends Component {
   constructor(props, context) {
@@ -15,7 +16,8 @@ class App extends Component {
     this.handleProfileClick = this.handleProfileClick.bind(this);
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.handleRecipeRender = this.handleRecipeRender.bind(this);
-    this.context = context;
+
+    this.uhh = context;
     this.state = {
       0: true,
       1: false,
@@ -44,27 +46,19 @@ class App extends Component {
   }
 
   handleSignUpSubmit(e) {
-    console.log('inside handlesignupsubmit')
-    this.setState({ 0: false, 1: false, 2: true, 3: false })
     axios.post('/signup', { username: this.state.username, password: this.state.password })
       .then(response => {
-        console.log('response', response)
-        //response.data
-      })
-      .catch(err => {
-        console.log(err)
+        if (response.status === 200)
+          this.setState({ isAuthenticated: true });
       })
   }
 
   handleLoginSubmit(e) {
-    e.preventDefault();
     axios.post('/login', { username: this.state.username, password: this.state.password })
       .then((response) => {
-        console.log('login succesful!');
-        // this.setState({ 0: false, 1: false, 2: true, 3: false });
-        // this.handleRecipeRender();
-        this.setState({ isAuthenticated: true });
-        this.context.router.transitionTo('/search');
+
+        if (response.status === 200)
+          this.setState({ isAuthenticated: true });
       })
       .catch(err => {
         console.log(err);
@@ -110,6 +104,18 @@ class App extends Component {
                 <p>NOT AUTHORIZED</p>
             )}
           />
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              this.state.isAuthenticated ?
+                <Profile
+                  username={this.state.username}
+                  isAuthenticated={this.state.isAuthenticated}
+                /> :
+                <p>NOT AUTHORIZED</p>
+            )}
+          />
         </div>
       </Router>
     );
@@ -141,8 +147,9 @@ class App extends Component {
   }
 }
 
-App.contextTypes = {
-  router: React.PropTypes.object,
-};
+
+// App.contextTypes = {
+//   router: React.PropType.object
+// }
 
 module.exports = App;
