@@ -82,11 +82,11 @@ userController.createUserTable = (req, res, next) => {
   db.conn.query(`CREATE TABLE ${username} (
                     "_id" SERIAL PRIMARY KEY NOT NULL,
                     "day" TEXT,
-                    "label" TEXT, 
-                    "image" TEXT, 
-                    "url" TEXT, 
-                    "yield" INT, 
-                    "healthLabels" TEXT[], 
+                    "label" TEXT,
+                    "image" TEXT,
+                    "url" TEXT,
+                    "yield" INT,
+                    "healthLabels" TEXT[],
                     "ingredientLines" TEXT[]
                  );`,
     (error, result) => {

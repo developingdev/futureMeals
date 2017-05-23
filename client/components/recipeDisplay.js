@@ -27,11 +27,7 @@ class RecipeDisplay extends Component {
   handleSearchSubmit(e) {
     e.preventDefault();
     console.log('search!');
-    // const base = 'https://api.edamam.com/search?';
-    // const q = `q=${this.state.q}`;
-    // const idAndKey = '&app_id=9c91d5f4&app_key=6f47ee6858565edebe96788f8743461a';
-    // const range = '&from=0&to=5';
-    // const url = base + q + idAndKey + range;
+
     axios.get(`/search?query=${this.state.q}`)
       .then((response) => {
         this.setState({ recipes: response.data.hits });

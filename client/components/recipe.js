@@ -6,23 +6,26 @@ class Recipe extends Component {
   constructor(props) {
     super(props)
     this.saveToDay = this.saveToDay.bind(this);
+    this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.state = {
+      username: "",
       day: "",
     }
   }
 
   handleDropDownChange(e) {
-    this.setState({day: e.target.value})
+    this.setState({ day: e.target.value })
   }
 
 
   saveToDay(e) {
     e.preventDefault();
-    axios.post('/recipeDisplay', { day: this.state.day, //TEST THIS!!!
-                                   username: this.props.username, //USERNAME MUST BE PASSED DOWN FROM PARENT
-                                   recipe: this.props.recipedata
-                                  })
+    axios.post('/recipeDisplay', {
+      day: this.state.day, //TEST THIS!!!
+      username: this.props.username, //USERNAME MUST BE PASSED DOWN FROM PARENT
+      recipe: this.props.recipedata
+    })
       .then(response => {
         console.log(response.data);
       });
@@ -30,10 +33,9 @@ class Recipe extends Component {
   }
 
   render() {
-    console.log(this.state)
 
     let ingredients = this.props.recipedata.recipe.ingredientLines.map((curr, index) => {
-      return <li>{curr}</li>
+      return <li key={index}>{curr}</li>
     })
     //ingredientLines is an array so wont display properly
     return (
@@ -52,7 +54,7 @@ class Recipe extends Component {
           </select>
           <input type="submit" value="Save" />
         </form>
-        <a href={this.props.recipedata.recipe.url}><img src={this.props.recipedata.recipe.image}/></a>
+        <a href={this.props.recipedata.recipe.url}><img src={this.props.recipedata.recipe.image} /></a>
         <h3>{this.props.recipedata.recipe.label}</h3>
         <ul>{ingredients}</ul>
         <p>Yield: {this.props.recipedata.recipe.yield}</p>
