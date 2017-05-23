@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
-import Login from './login.js';
-import Signup from './signup.js';
-import Profile from './profile.js';
-import RecipeDisplay from './recipeDisplay.js';
+import Login from './login';
+import Signup from './signup';
+import Profile from './profile';
+import RecipeDisplay from './recipeDisplay';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSignUpClick = this.handleSignUpClick.bind(this);
@@ -21,7 +22,8 @@ class App extends Component {
       3: false,
       username: '',
       password: '',
-    }
+      isAuthenticated: false,
+    };
   }
 
   handleSignUpClick() {
@@ -56,24 +58,59 @@ class App extends Component {
   handleLoginSubmit(e) {
     e.preventDefault();
     axios.post('/login', { username: this.state.username, password: this.state.password })
-      .then(response => {
-        this.setState({ 0: false, 1: false, 2: true, 3: false })
+      .then((response) => {
+        console.log('login succesful!');
+        this.setState({ 0: false, 1: false, 2: true, 3: false });
         // this.handleRecipeRender();
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       });
   }
 
-
-  // componentDidMount() {
-  //   axios.post(
-  // }
-
-
   render() {
-    console.log(this.state)
-    if (this.state[0] === true) {
+    return (
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Login
+                handleSignUpClick={this.handleSignUpClick}
+                handleChange={this.handleChange}
+                handleLoginSubmit={this.handleLoginSubmit}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() => (
+              <Signup
+                handleChange={this.handleChange}
+                handleSignUpSubmit={this.handleSignUpSubmit}
+                isAuthenticated={this.state.isAuthenticated}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/search"
+            render={() => (
+              this.state.isAuthenticated ?
+                <RecipeDisplay
+                  username={this.state.username}
+                  handleProfileClick={this.handleProfileClick}
+                  isAuthenticated={this.state.isAuthenticated}
+                /> :
+                <p>NOT AUTHORIZED</p>
+            )}
+          />
+        </div>
+      </Router>
+    );
+    /*if (this.state[0] === true) {
       return (
         <div>
           <Login handleSignUpClick={this.handleSignUpClick} handleChange={this.handleChange} handleLoginSubmit={this.handleLoginSubmit} />
@@ -88,16 +125,16 @@ class App extends Component {
     } else if (this.state[2] === true) {
       return (
         <div>
-          <RecipeDisplay username={this.state.username} handleProfileClick={this.handleProfileClick}/>
+          <RecipeDisplay username={this.state.username} handleProfileClick={this.handleProfileClick} />
         </div>
       )
     } else if (this.state[3] === true) {
       return (
         <div>
-          <Profile username={this.state.username}/>
+          <Profile username={this.state.username} />
         </div>
       )
-    }
+    }*/
   }
 }
 
