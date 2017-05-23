@@ -12,12 +12,14 @@ class Profile extends Component {
   }
 
   render() {
+    console.log('inside Profile render function')
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const dayComponents = [];
     for (let i = 0; i < days.length; i += 1) {
       dayComponents.push(<Day username={this.state.username} day={days[i]} />);
     }
 
+    console.log(dayComponents);
     return (
       <div>
         <h1>Profile Page</h1>
