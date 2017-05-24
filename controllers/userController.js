@@ -14,6 +14,7 @@ userController.verifyUser = (req, res, next) => {
   const password = req.body.password;
   if (!username || !password) res.status(401).send('Please, enter username AND password');
   else {
+<<<<<<< HEAD
     console.log('userController.verifyUser');
     // db.conn.query(`SELECT username, password FROM users WHERE username = '${username}';`,
     //   (error, result) => {
@@ -29,6 +30,25 @@ userController.verifyUser = (req, res, next) => {
     //       });
     //     }
     //   });
+=======
+    db.connections.User.findAll({
+      where: {
+        username: username
+      }
+    }).then((error, result) => {
+        if (error) res.send(error);
+        else if (!result.rows.length) res.status(400).send('no username found');
+        else {
+          bcrypt.compare(password, result.rows[0].password).then((isSame) => {
+            if (isSame) {
+              res.status(200).send('password matches');
+            } else {
+              res.status(401).send('wrong password');
+            }
+          });
+        }
+      });
+>>>>>>> af323d6084f5bdd8abee8fbbda1458d95e6e5752
   }
 };
 
@@ -37,6 +57,7 @@ userController.verifyUser = (req, res, next) => {
 // if username already exists, don't create new user
 userController.checkIfUsernameExists = (req, res, next) => {
   const username = req.body.username;
+<<<<<<< HEAD
   console.log('userController.checkIfUsernameExists');
   next();
   // db.conn.query(`SELECT username FROM users WHERE username = '${username}';`,
@@ -44,6 +65,16 @@ userController.checkIfUsernameExists = (req, res, next) => {
   //     if (result.rows.length) res.status(400).send('username exists already');
   //     else next();
   //   });
+=======
+  console.log(db.connections)
+  db.connections.User.findAll({
+    where: {
+      username: username
+    }
+  }).then((err,users)=>{
+    if (err) next();
+  });
+>>>>>>> af323d6084f5bdd8abee8fbbda1458d95e6e5752
 };
 
 // POST REQUEST FROM SIGNUP (CONTINUED):
@@ -65,6 +96,7 @@ userController.addToUsersTable = (req, res, next) => {
     // Store hash in your password DB.
     console.log('Orignal PW: ', password);
     console.log('Encrypted PW: ', hash);
+<<<<<<< HEAD
     // db.conn.query(`INSERT INTO users ("username", "password", "healthlabel")
     //                VALUES ('${username}', '${hash}', ARRAY['${healthlabel}']);`,
     //   (error, result) => {
@@ -97,6 +129,17 @@ userController.createUserTable = (req, res, next) => {
   //     if (error) res.status(400).send(error);
   //     else res.status(200).send('created new table for new user');
   //   });
+=======
+    db.connections.User.create({
+      username,
+      password : hash,
+      healthlabel
+    }).then( (user) => {
+        res.status(200);
+        res.end();
+    });
+  });
+>>>>>>> af323d6084f5bdd8abee8fbbda1458d95e6e5752
 };
 
 module.exports = userController;
