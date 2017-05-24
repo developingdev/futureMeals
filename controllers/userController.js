@@ -13,7 +13,7 @@ userController.verifyUser = (req, res, next) => {
   if (!username || !password)
     res.status(401).send('Please, enter username AND password');
   else {
-    db.connections.User.findAll({  // UPDATE TO FIND ONE?
+    db.connections.User.findAll({
       where: {
         username: username
       }

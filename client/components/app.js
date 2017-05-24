@@ -4,6 +4,7 @@ import axios from 'axios';
 import Login from './login';
 import Signup from './signup';
 import Profile from './profile';
+import Nav from './nav';
 import RecipeDisplay from './recipeDisplay';
 
 class App extends Component {
