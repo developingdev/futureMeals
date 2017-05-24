@@ -57,7 +57,7 @@ function createTables() {
             type: Sequelize.ARRAY(Sequelize.TEXT)
         }
     });
-    Recipe.sync({force:true});
+    Recipe.sync();
     db.connections.Recipe = Recipe;
 
     // JOIN TABLE
@@ -72,7 +72,7 @@ function createTables() {
             type: Sequelize.STRING
         }
     });
-    UserAndRecipe.sync({force:true});
+    UserAndRecipe.sync();
     db.connections.UserAndRecipe = UserAndRecipe;
 
     // SESSION TABLE
