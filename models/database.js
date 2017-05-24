@@ -1,7 +1,6 @@
 const pg = require('pg');
 const Sequelize = require('sequelize');
 
-
 const uri = 'postgres://@localhost/futuremeals';
 const sequelize = new Sequelize(uri);
 const db = {connections: {}};
@@ -78,7 +77,7 @@ function createTables() {
     // SESSION TABLE
     const Session = sequelize.define('session', {
         uid: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER // primary key true, auto increment true
         }
     });
 
