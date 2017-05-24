@@ -15,11 +15,12 @@ const sessionController = require('./controllers/sessionController');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/public')));
 
-app.post('/login', userController.verifyUser);
+app.post('/login', userController.verifyUser,
+                   cookieController.setCookie);
 
-app.post('/signup', cookieController.setCookie,
-                    userController.checkIfUsernameExists,
-                    userController.addToUsersTable);
+app.post('/signup', userController.checkIfUsernameExists,
+                    userController.addToUsersTable,
+                    cookieController.setCookie);
 app.post('/recipeDisplay', recipeController.saveRecipe);
 app.post('/delete', recipeController.deleteRecipe);
 app.get('/search', apiController.find);
