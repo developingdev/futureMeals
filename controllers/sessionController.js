@@ -1,6 +1,5 @@
 const db = require('../models/database');
-const sessionController = {
-};
+const sessionController = {};
 
 /**
 * isLoggedIn - find the appropriate session for this request in the database, then
@@ -8,40 +7,65 @@ const sessionController = {
 *
 *
 */
-sessionController.isLoggedIn = () => {
-  // sessions.find() if exists redirect // if not new session
-  // Session.findOne({cookieId: id}, (err,session) => {
-  //   console.log('this is session:', session)
-  //   if(!session){
-  //     const sessions = new Session({ cookieId: id });
-  //     sessions.save((err) => {
-  //       if (err) throw err;
-  //       console.log('in session login save', sessions);
-  //     });
-  //   }
-  //   else return true;
-  // })
+sessionController.isLoggedIn = (req, res, next) => {
+  console.log('COOKIES:', req.cookies)
+  if (req.cookies.futureMeals) {
+    db.connections.Session.findOne({
+      where: {
+        uid: req.cookies.futureMeals
+      }
+    }).then((result) => {
+      console.log('IS LOGGED IN', result);
+      if (result !== null) {
+        console.log('RESULT IS NOT NULL')
+        res.status(200);
+        return;
+      } else {
+        res.status(400);
+        res.end();
+      }
+    });
+  } else {
+    res.status(400);
+    res.end();
+  }
 };
 
 /**
-* startSession - create a new Session model and then save the new session to the
+* startSession - create a new Session and then save the new session to the
 * database.
 *
 *
 */
 sessionController.startSession = (req, res, next) => {
-  db.connections.Sessions.create({
-    username,
-  }).then((user) => {
-    // req.body.id = user[0].dataValues.id;
-      res.status(200);
-      res.end();
+  console.log('COOKIES:', req.cookies)
+  console.log('in startSession', req.body);
+  db.connections.Session.findOne({
+    where: {
+      uid: req.body.id
+    }
+  }).then((result) => {
+    console.log('in startSession', result);
+    if (result !== null) {
+      console.log('NOT NULL');
+      db.connections.Session.update({
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      }, {
+        where: {
+          uid: req.body.id
+        }
+      }).then(() => {
+        next();
+      })
+    } else {
+      db.connections.Session.create({uid: req.body.id}).then((user) => {
+        next();
+        // res.status(200);
+        // res.end();
+      });
+    }
   });
-  // const session = new Session({ cookieId: req.body._id });
-  // session.save((err) => {
-    // do something check if its working.
-    // next();
-  // });
 };
 
 module.exports = sessionController;

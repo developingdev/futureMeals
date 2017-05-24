@@ -1,7 +1,7 @@
 const pg = require('pg');
 const Sequelize = require('sequelize');
 
-const uri = 'postgres://@localhost/futuremeals';
+const uri = 'postgres://aoh89:password@localhost/futuremeals';
 const sequelize = new Sequelize(uri);
 const db = { connections: {} };
 
