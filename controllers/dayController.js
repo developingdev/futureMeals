@@ -3,25 +3,41 @@ const db = require('../models/database');
 const dayController = {};
 
 dayController.getRowsForDay = (req, res, next) => {
-    // console.log('req.params: ', req.params)
-    let username = req.params.username;
-    let day = req.params.day;
+    const username = req.params.username;
+    const day = req.params.day;
+    const User = db.connections.User;
+    const Recipe = db.connections.Recipe;
+    const UserAndRecipe = db.connections.UserAndRecipe;
 
-    db.connections.UserAndRecipe.hasMany(db.connections.Recipe, { foreignKey: 'id' });
-    db.connections.Recipe.belongsTo(db.connections.UserAndRecipe, { foreignKey: 'id' });
+    Recipe.findAll({
+        include: [{
+            model: User,
+        }],
+        where: { day }
 
-    db.connections.UserAndRecipe.findAll({ where: { day: day }, include: [db.connections.Recipe] })
-        .then((results) => {
-            const recipes = results.map(ele => ele.recipes[0].dataValues);
-            console.log(`found ${results.length} results for ${day}!`, recipes);
-            res.end(JSON.stringify(recipes));
+    }).then((results) => {
+        const recipes = results.map(ele => {
+            const recipe = ele.dataValues;
+            
+            return recipe;
         });
-    // db.conn.query(`SELECT * FROM ${username} WHERE day = '${day}';`, 
-    //     (error, result) => {
-    //         console.log(result)
-    //         if (error) res.status(400).send(error);
-    //         else res.status(200).send(result.rows);
-    //     })
-}
+        console.log(`found ${results.length} results for ${day}!`);
+        res.end(JSON.stringify(recipes));
+        // res.end();
+    });
+
+    // User.belongsTomMany(Recipe, { through: 'userandrecipe' });
+    // Recipe.belongsTomMany(User, { through: 'userandrecipe' });
+
+    // db.connections.UserAndRecipe.hasMany(db.connections.Recipe, { foreignKey: 'id' });
+    // db.connections.Recipe.belongsTo(db.connections.UserAndRecipe, { foreignKey: 'rid' });
+
+    // db.connections.UserAndRecipe.findAll({ where: { day }, include: [db.connections.Recipe] })
+    //     .then((results) => {
+    //         const recipes = results.map(ele => ele.recipes[0].dataValues);
+    //         console.log(`found ${results.length} results for ${day}!`, recipes);
+    //         res.end(JSON.stringify(recipes));
+    //     });
+};
 
 module.exports = dayController;

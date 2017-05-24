@@ -18,10 +18,12 @@ userController.verifyUser = (req, res, next) => {
         username: username
       }
     }).then((result) => {
+
       if (result === []) {
         res.status(400).send('no username found');
         return;
       } else {
+
         bcrypt.compare(password, result[0].dataValues.password).then((isSame) => {
           if (isSame) {
             req.body.id = result[0].dataValues.id
@@ -46,10 +48,12 @@ userController.checkIfUsernameExists = (req, res, next) => {
       username: username
     }
   }).then((err, users) => {
+
     if (err)
       next();
     }
   );
+
 };
 
 // POST REQUEST FROM SIGNUP (CONTINUED):
@@ -72,7 +76,9 @@ userController.addToUsersTable = (req, res, next) => {
     // Store hash in your password DB.
     console.log('Orignal PW: ', password);
     console.log('Encrypted PW: ', hash);
+
     db.connections.User.create({username, password: hash, healthlabel}).then((user) => {
+
       req.body.id = user.dataValues.id;
       next();
       // res.status(200);
