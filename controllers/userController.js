@@ -18,11 +18,12 @@ userController.verifyUser = (req, res, next) => {
       where: {
         username: username
       }
-    }).then((error, result) => {
-        if (error) res.send(error);
-        else if (!result.rows.length) res.status(400).send('no username found');
+    }).then((result) => {
+      // FIX LOGIC
+      console.log(result);
+        if (result === []) { res.status(400).send('no username found'); return; }
         else {
-          bcrypt.compare(password, result.rows[0].password).then((isSame) => {
+          bcrypt.compare(password, result[0].dataValues.password).then((isSame) => {
             if (isSame) {
               res.status(200).send('password matches');
             } else {
