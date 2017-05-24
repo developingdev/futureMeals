@@ -8,28 +8,31 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <div className="jumbotron">
-          <h1>Recipe Generator</h1>
-        </div>
+        <h1>Login</h1>
         <form onSubmit={this.props.handleLoginSubmit}>
-          <input
-            placeholder="Username"
-            type="text"
-            name="username"
-            value={this.props.username}
-            onChange={this.props.handleChange}
-          />
-          <input
-            placeholder="Password"
-            type="password"
-            name="password"
-            value={this.props.password}
-            onChange={this.props.handleChange}
-          />
-          <Link to="/search" onClick={this.props.handleLoginSubmit}>Login</Link>
+          <div>
+            <input
+              placeholder="Username"
+              type="text"
+              name="username"
+              value={this.props.username}
+              onChange={this.props.handleChange}
+            />
+          </div>
+          <br/>
+          <div>
+            <input
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={this.props.password}
+              onChange={this.props.handleChange}
+            />
+            <Link to="/search" onClick={this.props.handleLoginSubmit}>Login</Link>
+          </div>
         </form>
-        <p>Don't have an account?</p>
-        <Link to="/signup">Signup</Link>
+        <br/>
+        <Link to="/signup">Don't have an account?</Link>
       </div>
     );
   }
