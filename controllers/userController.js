@@ -36,11 +36,14 @@ userController.verifyUser = (req, res, next) => {
 // if username already exists, don't create new user
 userController.checkIfUsernameExists = (req, res, next) => {
   const username = req.body.username;
-  db.conn.query(`SELECT username FROM users WHERE username = '${username}';`,
-    (error, result) => {
-      if (result.rows.length) res.status(400).send('username exists already');
-      else next();
-    });
+  console.log(db.connections)
+  db.connections.User.findAll({
+    where: {
+      username: username
+    }
+  }).then((err,users)=>{
+    if (err) next();
+  });
 };
 
 // POST REQUEST FROM SIGNUP (CONTINUED):
@@ -62,37 +65,15 @@ userController.addToUsersTable = (req, res, next) => {
     // Store hash in your password DB.
     console.log('Orignal PW: ', password);
     console.log('Encrypted PW: ', hash);
-    db.conn.query(`INSERT INTO users ("username", "password", "healthlabel")
-                   VALUES ('${username}', '${hash}', ARRAY['${healthlabel}']);`,
-      (error, result) => {
-        console.log(error)
-        console.log(result)
-        if (error){ res.status(400).send(error); console.log("TWO")}
-
-        else next();
-      });
-  });
-};
-
-// POST REQUEST FROM SIGNUP (CONTINUED):
-// create table for each new user when they sign up
-userController.createUserTable = (req, res, next) => {
-  const username = req.body.username;
-  console.log("IN CREATE TABLE");
-  db.conn.query(`CREATE TABLE ${username} (
-                    "_id" SERIAL PRIMARY KEY NOT NULL,
-                    "day" TEXT,
-                    "label" TEXT,
-                    "image" TEXT,
-                    "url" TEXT,
-                    "yield" INT,
-                    "healthLabels" TEXT[],
-                    "ingredientLines" TEXT[]
-                 );`,
-    (error, result) => {
-      if (error) res.status(400).send(error);
-      else res.status(200).send('created new table for new user');
+    db.connections.User.create({
+      username,
+      password : hash,
+      healthlabel
+    }).then( (err, user) => {
+      if (err) return new Error(err);
+      else res.send(200);
     });
+  });
 };
 
 module.exports = userController;

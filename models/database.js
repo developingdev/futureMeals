@@ -1,22 +1,9 @@
 const pg = require('pg');
-
 const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('futuremeals', 'aoh89', 'password', {
-//     host: 'localhost',
-//     dialect: 'postgres',
-//     pool: {
-//         max: 10,
-//         min: 0,
-//         idle: 10000
-//     }
-// });
 
-// const db = {};
-
-
-const uri = 'postgres://yvggemra:1lNb7oKhWZtGLc39iprwZZksFvKN3IZr@hard-plum.db.elephantsql.com:5432/yvggemra';
-
+const uri = 'postgres://aoh89:password@localhost/futuremeals';
 const sequelize = new Sequelize(uri);
+const db = {connections: {}};
 
 sequelize
     .authenticate()
@@ -26,21 +13,6 @@ sequelize
     .catch(err => {
         console.error('Unable to connect to the database:', err);
     });
-
-function createUserTable() {
-    const User = sequelize.define('user', {
-        username: {
-            type: Sequelize.STRING
-        },
-        password: {
-            type: Sequelize.STRING
-        },
-        healthlabel: {
-            type: Sequelize.STRING
-        }
-    })
-    User.sync();
-}
 
 function createTables() {
     // USER TABLE
@@ -56,6 +28,7 @@ function createTables() {
         }
     });
     User.sync();
+    db.connections.User = User;
 
     // RECIPE TABLE
     const Recipe = sequelize.define('recipe', {
@@ -82,6 +55,7 @@ function createTables() {
         }
     });
     Recipe.sync();
+    db.connections.Recipe = Recipe;
 
     // JOIN TABLE
     const UserAndRecipe = sequelize.define('userandrecipe', {
@@ -95,9 +69,8 @@ function createTables() {
             type: Sequelize.STRING
         }
     });
-    UserAndRecipe.hasMany(User);
-    UserAndRecipe.hasMany(Recipe);
     UserAndRecipe.sync();
+    db.connections.UserAndRecipe = UserAndRecipe;
 
     // SESSION TABLE
     const Session = sequelize.define('session', {
@@ -106,19 +79,10 @@ function createTables() {
         }
     });
 
-    Session.hasMany(User);
     Session.sync();
+    db.connections.Session = Session;
 }
 
 createTables();
-
-const db = sequelize;
-// pg.connect(uri, (error, db_) => {
-//     console.log('database connected');
-//     if(error) console.log(error);
-//     db.conn = db_;
-// })
-
-
 
 module.exports = db;
