@@ -7,6 +7,8 @@ const sessionController = {};
 *
 *
 */
+
+// TO DO - IS LOGGED IN NEEDS TO CHANGE STATE
 sessionController.isLoggedIn = (req, res, next) => {
   console.log('COOKIES:', req.cookies)
   if (req.cookies.futureMeals) {
@@ -19,7 +21,7 @@ sessionController.isLoggedIn = (req, res, next) => {
       if (result !== null) {
         console.log('RESULT IS NOT NULL')
         res.status(200);
-        return;
+        res.end();
       } else {
         res.status(400);
         res.end();

@@ -1,6 +1,5 @@
 const request = require('request');
 
-
 const find = (req, res, next) => {
   const query = req.query;
   const base = 'https://api.edamam.com/search?';
