@@ -77,7 +77,7 @@ function createTables() {
     // SESSION TABLE
     const Session = sequelize.define('session', {
         uid: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER // primary key true, auto increment true
         }
     });
 

@@ -1,3 +1,4 @@
+const db = require('../models/database');
 const sessionController = {
 };
 
@@ -29,6 +30,13 @@ sessionController.isLoggedIn = () => {
 *
 */
 sessionController.startSession = (req, res, next) => {
+  db.connections.Sessions.create({
+    username,
+  }).then((user) => {
+    // req.body.id = user[0].dataValues.id;
+      res.status(200);
+      res.end();
+  });
   // const session = new Session({ cookieId: req.body._id });
   // session.save((err) => {
     // do something check if its working.

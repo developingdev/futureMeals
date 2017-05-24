@@ -25,7 +25,9 @@ userController.verifyUser = (req, res, next) => {
         else {
           bcrypt.compare(password, result[0].dataValues.password).then((isSame) => {
             if (isSame) {
-              res.status(200).send('password matches');
+              req.body.id = result[0].dataValues.id
+              next();
+              // res.status(200).send('password matches');
             } else {
               res.status(401).send('wrong password');
             }
@@ -73,9 +75,11 @@ userController.addToUsersTable = (req, res, next) => {
       username,
       password : hash,
       healthlabel
-    }).then( (user) => {
-        res.status(200);
-        res.end();
+    }).then((user) => {
+      req.body.id = user.dataValues.id;
+      next();
+        // res.status(200);
+        // res.end();
     });
   });
 };
