@@ -58,7 +58,6 @@ class App extends Component {
             path="/"
             render={() => (
               <Login
-                handleSignUpClick={this.handleSignUpClick}
                 handleChange={this.handleChange}
                 handleLoginSubmit={this.handleLoginSubmit}
               />
@@ -81,7 +80,6 @@ class App extends Component {
               this.state.isAuthenticated ?
                 <RecipeDisplay
                   username={this.state.username}
-                  handleProfileClick={this.handleProfileClick}
                   isAuthenticated={this.state.isAuthenticated}
                   match={match}
                 /> :
