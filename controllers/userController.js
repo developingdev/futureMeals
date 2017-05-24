@@ -14,8 +14,11 @@ userController.verifyUser = (req, res, next) => {
   const password = req.body.password;
   if (!username || !password) res.status(401).send('Please, enter username AND password');
   else {
-    db.conn.query(`SELECT username, password FROM users WHERE username = '${username}';`,
-      (error, result) => {
+    db.connections.User.findAll({
+      where: {
+        username: username
+      }
+    }).then((error, result) => {
         if (error) res.send(error);
         else if (!result.rows.length) res.status(400).send('no username found');
         else {
