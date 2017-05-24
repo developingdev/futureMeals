@@ -52,69 +52,55 @@ class App extends Component {
 
   render() {
     return (
-        <Router>
-          <div>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                (<div>
-                  <Nav />
-                  <Login
-                    handleSignUpClick={this.handleSignUpClick}
-                    handleChange={this.handleChange}
-                    handleLoginSubmit={this.handleLoginSubmit}
-                  />
-                </div>)
-              )}
-            />
-            <Route
-              exact
-              path="/signup"
-              render={() => (
-                (<div>
-                  <Nav />
-                  <Signup
-                    handleChange={this.handleChange}
-                    handleSignUpSubmit={this.handleSignUpSubmit}
-                    isAuthenticated={this.state.isAuthenticated}
-                  />
-                </div>)
-              )}
-            />
-            <Route
-              path="/search"
-              render={({ match }) => (
-                this.state.isAuthenticated ?
-                (<div>
-                  <Nav />
-                  <RecipeDisplay
-                    username={this.state.username}
-                    handleProfileClick={this.handleProfileClick}
-                    isAuthenticated={this.state.isAuthenticated}
-                    match={match}
-                  />
-                </div>) :
-                  <h1>NOT AUTHORIZED</h1>
-              )}
-            />
-            <Route
-              exact
-              path="/profile"
-              render={() => (
-                this.state.isAuthenticated ?
-                  (<div>
-                    <Nav />
-                    <Profile
-                      username={this.state.username}
-                      isAuthenticated={this.state.isAuthenticated}
-                    />
-                  </div>) :
-                  <h1>NOT AUTHORIZED</h1>
-              )}
-            />
-          </div>
-        </Router>
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Login
+                handleChange={this.handleChange}
+                handleLoginSubmit={this.handleLoginSubmit}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() => (
+              <Signup
+                handleChange={this.handleChange}
+                handleSignUpSubmit={this.handleSignUpSubmit}
+                isAuthenticated={this.state.isAuthenticated}
+              />
+            )}
+          />
+          <Route
+            path="/search"
+            render={({ match }) => (
+              this.state.isAuthenticated ?
+                <RecipeDisplay
+                  username={this.state.username}
+                  isAuthenticated={this.state.isAuthenticated}
+                  match={match}
+                /> :
+                <p>NOT AUTHORIZED</p>
+            )}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              this.state.isAuthenticated ?
+                <Profile
+                  username={this.state.username}
+                  isAuthenticated={this.state.isAuthenticated}
+                /> :
+                <p>NOT AUTHORIZED</p>
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 }
