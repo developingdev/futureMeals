@@ -10,7 +10,7 @@ recipeController.saveRecipe = (req, res, next) => {
     let day = req.body.day;
     let username = req.body.username;
     let recipe = req.body.recipe.recipe;
-    console.log(recipe)
+    // console.log(recipe)
     if (!day || !username || !recipe) res.status(400).send('please send day username AND recipe');
     else {
         console.log('in saveRecipe have day username and recipe');
@@ -44,4 +44,5 @@ recipeController.deleteRecipe = (req, res, next) => {
         }
     );
 }
+
 module.exports = recipeController;

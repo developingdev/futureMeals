@@ -19,8 +19,7 @@ app.post('/login', userController.verifyUser);
 
 app.post('/signup', cookieController.setCookie,
                     userController.checkIfUsernameExists,
-                    userController.addToUsersTable,
-                    userController.createUserTable);
+                    userController.addToUsersTable);
 app.post('/recipeDisplay', recipeController.saveRecipe);
 app.post('/delete', recipeController.deleteRecipe);
 app.get('/search', apiController.find);
