@@ -1,9 +1,9 @@
 const cookieController = {};
 cookieController.setCookie = setCookie;
 
+// CREATES A COOKIE CONTAINING THE USER'S ID - CALLED DURING SIGN UP AND LOGIN
 function setCookie(req, res, next) {
-  console.log('COOKIE BODY', req.body);
-  res.cookie('futureMeals', req.body.id, { httpOnly: true })
+  res.cookie('futureMeals', req.body.id, { maxAge: 600000, httpOnly: true })
       res.status(200);
       res.end();
 }
