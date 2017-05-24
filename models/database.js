@@ -1,20 +1,8 @@
 const pg = require('pg');
 
 const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('futuremeals', 'aoh89', 'password', {
-//     host: 'localhost',
-//     dialect: 'postgres',
-//     pool: {
-//         max: 10,
-//         min: 0,
-//         idle: 10000
-//     }
-// });
 
-// const db = {};
-
-
-const uri = 'postgres://yvggemra:1lNb7oKhWZtGLc39iprwZZksFvKN3IZr@hard-plum.db.elephantsql.com:5432/yvggemra';
+const uri = 'postgres://@localhost/futuremeals';
 
 const sequelize = new Sequelize(uri);
 
