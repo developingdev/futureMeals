@@ -1,7 +1,7 @@
 const pg = require('pg');
 const Sequelize = require('sequelize');
 
-const uri = 'postgres://@localhost/futuremeals';
+const uri = 'postgres://aoh89:password@localhost/futuremeals';
 const sequelize = new Sequelize(uri);
 const db = {connections: {}};
 
@@ -18,7 +18,9 @@ function createTables() {
     // USER TABLE
     const User = sequelize.define('user', {
         username: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
         },
         password: {
             type: Sequelize.STRING

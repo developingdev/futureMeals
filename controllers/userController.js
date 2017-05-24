@@ -72,9 +72,9 @@ userController.addToUsersTable = (req, res, next) => {
       username,
       password : hash,
       healthlabel
-    }).then( (err, user) => {
-      if (err) return new Error(err);
-      else res.send(200);
+    }).then( (user) => {
+        res.status(200);
+        res.end();
     });
   });
 };
