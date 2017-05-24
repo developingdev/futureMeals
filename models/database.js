@@ -35,28 +35,28 @@ function createTables() {
     // RECIPE TABLE
     const Recipe = sequelize.define('recipe', {
         day: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         label: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         image: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         url: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         yield: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         healthLabels: {
-            type: Sequelize.STRING
+            type: Sequelize.ARRAY(Sequelize.TEXT)
         },
         ingredientLines: {
-            type: Sequelize.STRING
+            type: Sequelize.ARRAY(Sequelize.TEXT)
         }
     });
-    Recipe.sync();
+    Recipe.sync({force:true});
     db.connections.Recipe = Recipe;
 
     // JOIN TABLE
@@ -71,7 +71,7 @@ function createTables() {
             type: Sequelize.STRING
         }
     });
-    UserAndRecipe.sync();
+    UserAndRecipe.sync({force:true});
     db.connections.UserAndRecipe = UserAndRecipe;
 
     // SESSION TABLE

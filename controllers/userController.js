@@ -14,6 +14,7 @@ userController.verifyUser = (req, res, next) => {
   const password = req.body.password;
   if (!username || !password) res.status(401).send('Please, enter username AND password');
   else {
+
     db.connections.User.findAll({
       where: {
         username: username
@@ -42,6 +43,7 @@ userController.verifyUser = (req, res, next) => {
 // if username already exists, don't create new user
 userController.checkIfUsernameExists = (req, res, next) => {
   const username = req.body.username;
+
   console.log(db.connections)
   db.connections.User.findAll({
     where: {
@@ -71,6 +73,7 @@ userController.addToUsersTable = (req, res, next) => {
     // Store hash in your password DB.
     console.log('Orignal PW: ', password);
     console.log('Encrypted PW: ', hash);
+
     db.connections.User.create({
       username,
       password : hash,
