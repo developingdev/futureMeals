@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const uri = 'postgres://@localhost/futuremeals';
 const sequelize = new Sequelize(uri);
-const db = {connections: {}};
+const db = { connections: {} };
 
 sequelize
     .authenticate()
@@ -29,7 +29,7 @@ function createTables() {
             type: Sequelize.STRING
         }
     });
-    User.sync();
+    // User.sync();
     db.connections.User = User;
 
     // RECIPE TABLE
@@ -56,7 +56,7 @@ function createTables() {
             type: Sequelize.ARRAY(Sequelize.TEXT)
         }
     });
-    Recipe.sync();
+    // Recipe.sync();
     db.connections.Recipe = Recipe;
 
     // JOIN TABLE
@@ -71,18 +71,28 @@ function createTables() {
             type: Sequelize.STRING
         }
     });
-    UserAndRecipe.sync();
+    // UserAndRecipe.sync();
     db.connections.UserAndRecipe = UserAndRecipe;
 
     // SESSION TABLE
-    const Session = sequelize.define('session', {
-        uid: {
-            type: Sequelize.INTEGER // primary key true, auto increment true
-        }
-    });
+    // const Session = sequelize.define('session', {
+    //     uid: {
+    //         type: Sequelize.INTEGER // primary key true, auto increment true
+    //     }
+    // });
 
-    Session.sync();
-    db.connections.Session = Session;
+    // Session.sync();
+    // db.connections.Session = Session;
+
+
+
+    User.belongsToMany(Recipe, { through: UserAndRecipe, foreignKey: 'id', otherKey: 'rid' });
+    Recipe.belongsToMany(User, { through: UserAndRecipe, foreignKey: 'id', otherKey: 'uid' });
+
+
+    User.sync();
+    Recipe.sync();
+    UserAndRecipe.sync();
 }
 
 createTables();

@@ -22,19 +22,19 @@ userController.verifyUser = (req, res, next) => {
     }).then((result) => {
       // FIX LOGIC
       console.log(result);
-        if (result === []) { res.status(400).send('no username found'); return; }
-        else {
-          bcrypt.compare(password, result[0].dataValues.password).then((isSame) => {
-            if (isSame) {
-              req.body.id = result[0].dataValues.id
-              next();
-              // res.status(200).send('password matches');
-            } else {
-              res.status(401).send('wrong password');
-            }
-          });
-        }
-      });
+      if (result === []) { res.status(400).send('no username found'); return; }
+      else {
+        bcrypt.compare(password, result[0].dataValues.password).then((isSame) => {
+          if (isSame) {
+            req.body.id = result[0].dataValues.id
+            next();
+            // res.status(200).send('password matches');
+          } else {
+            res.status(401).send('wrong password');
+          }
+        });
+      }
+    });
   }
 };
 
@@ -49,7 +49,7 @@ userController.checkIfUsernameExists = (req, res, next) => {
     where: {
       username: username
     }
-  }).then((err,users)=>{
+  }).then((err, users) => {
     if (err) next();
   });
 };
@@ -76,13 +76,13 @@ userController.addToUsersTable = (req, res, next) => {
 
     db.connections.User.create({
       username,
-      password : hash,
+      password: hash,
       healthlabel
     }).then((user) => {
       req.body.id = user.dataValues.id;
       next();
-        // res.status(200);
-        // res.end();
+      // res.status(200);
+      // res.end();
     });
   });
 };

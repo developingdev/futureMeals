@@ -25,7 +25,7 @@ class Day extends Component {
     axios.get(`day/${this.state.day}/${this.state.username}`)
       .then((response) => {
         console.log(response.data);
-        this.setState({savedRecipes: response.data});
+        this.setState({ savedRecipes: response.data });
       });
   }
 
