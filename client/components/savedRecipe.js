@@ -4,11 +4,7 @@ import axios from 'axios';
 class SavedRecipe extends Component {
 
   render() {
-    console.log('INGREDIENTS: ', this.props.recipeData.ingredientLines)
-    // const ingredients = this.props.recipeData.ingredientLines[0].split(/,|;/g).map((ingredient, index) => {
-    //   console.log(ingredient)
-    //   return <li>{ingredient}</li>
-    // })
+
     const ingredients = this.props.recipeData.ingredientLines.map(ing => {
       return <li>{ing}</li>;
     })
