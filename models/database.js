@@ -75,14 +75,14 @@ function createTables() {
     db.connections.UserAndRecipe = UserAndRecipe;
 
     // SESSION TABLE
-    // const Session = sequelize.define('session', {
-    //     uid: {
-    //         type: Sequelize.INTEGER // primary key true, auto increment true
-    //     }
-    // });
+    const Session = sequelize.define('session', {
+        uid: {
+            type: Sequelize.INTEGER // primary key true, auto increment true
+        }
+    });
 
-    // Session.sync();
-    // db.connections.Session = Session;
+    Session.sync();
+    db.connections.Session = Session;
 
 
 
