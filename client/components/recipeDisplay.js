@@ -12,6 +12,7 @@ class RecipeDisplay extends Component {
       q: '',
       healthlabel: '',
       recipes: [],
+      page: 1
     };
   }
 
@@ -26,19 +27,28 @@ class RecipeDisplay extends Component {
 
   handleSearchSubmit(e) {
     e.preventDefault();
-    console.log('search!');
-
-    axios.get(`/search?query=${this.state.q}`)
+    axios.get(`/search?query=${this.state.q}&page=${this.state.page}`)
       .then((response) => {
         this.setState({ recipes: response.data.hits });
       });
   }
 
   render() {
-    const recipes = this.state.recipes.map((curr, i) => (
-      <Recipe recipedata={curr} username={this.props.username} key={i} />
-    ));
-
+    const randomIndex = {};
+    let count = this.state.recipes.length;
+    if (count < 5){
+      count = 5;
+    }
+    while (Object.keys(randomIndex).length < 5){
+      const index = Math.round(Math.random()*count);
+      randomIndex[index] = index;
+    }
+    
+    const recipes = this.state.recipes.map((curr, i) => {
+      if (randomIndex[i]) {
+        return (<Recipe recipedata={curr} username={this.props.username} key={i} />)
+      }
+    });
 
     return (
       <div>
@@ -53,7 +63,6 @@ class RecipeDisplay extends Component {
           />
           <Link to="/search" onClick={this.handleSearchSubmit}>Submit</Link>
         </form>
-        <Link to="/profile" onClick={this.props.handleProfileClick}>Profile</Link>
         {recipes}
       </div>
     );

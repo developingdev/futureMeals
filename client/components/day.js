@@ -21,10 +21,8 @@ class Day extends Component {
   }
 
   componentDidMount() {
-    console.log('in component did mount')
     axios.get(`day/${this.state.day}/${this.state.username}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({ savedRecipes: response.data });
       });
   }
