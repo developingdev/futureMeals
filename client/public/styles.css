@@ -55,3 +55,9 @@ select {
 .title {
   font-family: cursive;
 }
+
+.day {
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 20px;
+}
