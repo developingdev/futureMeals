@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class SavedRecipe extends Component {
-
   render() {
+
 
     const ingredients = this.props.recipeData.ingredientLines.map(ing => {
       return <li>{ing}</li>;
     })
     // console.log('INGREDIENTS ---->', Array.isArray(ingredients))
+
 
     return (
       <div>
@@ -17,7 +18,7 @@ class SavedRecipe extends Component {
         <ul>{ingredients}</ul>
         <p>Yield: {this.props.recipeData.yield}</p>
       </div>
-    )
+    );
   }
 }
 

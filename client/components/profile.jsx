@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Recipe from './recipe.js';
-import Day from './day.js'; //whatever child components we need
+import Recipe from './recipe';
+import Day from './day';
 
 class Profile extends Component {
   constructor(props) {
