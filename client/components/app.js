@@ -61,7 +61,7 @@ class App extends Component {
               (<div>
                 <Nav />
                 <div className="jumbotron">
-                  <h1>Recipe Generator</h1>
+                  <h1 className="title">Future Meals 3.Oh</h1>
                 </div>
                 <Login
                   handleSignUpClick={this.handleSignUpClick}
@@ -78,7 +78,7 @@ class App extends Component {
               (<div>
                 <Nav />
                 <div className="jumbotron">
-                  <h1>Recipe Generator</h1>
+                  <h1 className="title">Future Meals 3.Oh</h1>
                 </div>
                 <Signup
                   handleChange={this.handleChange}
@@ -95,7 +95,7 @@ class App extends Component {
                 (<div>
                   <Nav />
                   <div className="jumbotron">
-                    <h1>Recipe Generator</h1>
+                    <h1 className="title">Future Meals 3.Oh</h1>
                   </div>
                   <RecipeDisplay
                     username={this.state.username}
@@ -107,7 +107,7 @@ class App extends Component {
                   <div>
                     <Nav />
                     <div className="jumbotron">
-                      <h1>Recipe Generator</h1>
+                      <h1 className="title">Future Meals 3.Oh</h1>
                     </div>
                     <h1>NOT AUTHORIZED</h1>
                   </div>
@@ -121,7 +121,7 @@ class App extends Component {
                 (<div>
                   <Nav />
                   <div className="jumbotron">
-                    <h1>Recipe Generator</h1>
+                    <h1>Future Meals 3.Oh</h1>
                   </div>
                   <Profile
                     username={this.state.username}
@@ -131,7 +131,7 @@ class App extends Component {
                   <div>
                     <Nav />
                     <div className="jumbotron">
-                      <h1>Recipe Generator</h1>
+                      <h1 className="title">Future Meals 3.Oh</h1>
                     </div>
                     <h1>NOT AUTHORIZED</h1>
                   </div>

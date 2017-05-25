@@ -1,11 +1,57 @@
 .navBarLinks {
-    padding: 20px 15px 20px 15px;
-    background-color: #ffffa7;
-    margin: auto;
+  padding: 25px 15px 20px 15px;
+  background-color: teal;
+  margin-top: 5px;
+  color: white;
 }
 
 .navBarDiv {
-    background-color: #ffffa7;
-    margin: auto;
-    height: 38px;
+  background-color: teal;
+  padding-top: 10px;
+  margin: auto;
+  height: 48px;
+}
+
+a:hover {
+  color: gold;
+}
+
+#loginLink {
+  color: white;
+}
+
+#signupLink {
+  color: white;
+}
+
+#searchSubmit {
+  color: white;
+}
+
+button {
+  width: 150px;
+  background-color: teal;
+}
+
+Link {
+  color: white;
+}
+
+select {
+  background-color: teal;
+  color: white;
+  height: 27px;
+  width: 150px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.save {
+  background-color: teal;
+  color: white;
+  border: none;
+}
+
+.title {
+  font-family: cursive;
 }

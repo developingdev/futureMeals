@@ -50,13 +50,15 @@ class Recipe extends Component {
             <option value="Saturday">Saturday</option>
             <option value="Sunday">Sunday</option>
           </select>
-          <input type="submit" value="Save" />
+          <input className="save" type="submit" value="Save" />
         </form>
+        <br />
         <a href={this.props.recipedata.recipe.url}><img src={this.props.recipedata.recipe.image}/></a>
         <h3>{this.props.recipedata.recipe.label}</h3>
         <ul>{ingredients}</ul>
         <p>Yield: {this.props.recipedata.recipe.yield}</p>
         <p>Calories: {this.props.recipedata.recipe.calories}</p>
+        <br />
       </div>
     )
   }

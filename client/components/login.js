@@ -28,7 +28,9 @@ class Login extends Component {
               value={this.props.password}
               onChange={this.props.handleChange}
             />
-            <Link to="/search" onClick={this.props.handleLoginSubmit}>Login</Link>
+            <br/>
+            <br/>
+            <button><Link id="loginLink" to="/search" onClick={this.props.handleLoginSubmit}>Login</Link></button>
           </div>
         </form>
         <br/>

@@ -22,7 +22,7 @@ class Profile extends Component {
     console.log(dayComponents);
     return (
       <div>
-        <h1>Profile Page</h1>
+        <h1>Profile</h1>
         {dayComponents}
       </div>
     )
