@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Login extends Component {
     return (
       <div>
         <h1>Login</h1>
-        <form onSubmit={this.props.handleLoginSubmit}>
+        <form>
           <div>
             <input
               placeholder="Username"
@@ -30,10 +30,12 @@ class Login extends Component {
             />
             <br/>
             <br/>
-            <button><Link id="loginLink" to="/search" onClick={this.props.handleLoginSubmit}>Login</Link></button>
+              <Link to="/search" onClick={this.props.handleLoginSubmit}>Login</Link>
           </div>
         </form>
+        
         <br/>
+
         <Link to="/signup">Don't have an account?</Link>
       </div>
     );

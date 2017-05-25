@@ -39,7 +39,9 @@ class App extends Component {
   handleLoginSubmit() {
     axios.post('/login', { username: this.state.username, password: this.state.password })
       .then((response) => {
+        console.log(response.status);
         if (response.status === 200) {
+          console.log('good!');
           this.setState({ isAuthenticated: true });
         } else {
           this.setState({ isAuthenticated: false });
