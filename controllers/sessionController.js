@@ -10,16 +10,13 @@ const sessionController = {};
 
 // TO DO - IS LOGGED IN NEEDS TO CHANGE STATE
 sessionController.isLoggedIn = (req, res, next) => {
-  console.log('COOKIES:', req.cookies)
   if (req.cookies.futureMeals) {
     db.connections.Session.findOne({
       where: {
         uid: req.cookies.futureMeals
       }
     }).then((result) => {
-      console.log('IS LOGGED IN', result);
       if (result !== null) {
-        console.log('RESULT IS NOT NULL')
         res.status(200);
         res.end();
       } else {
@@ -40,16 +37,12 @@ sessionController.isLoggedIn = (req, res, next) => {
 *
 */
 sessionController.startSession = (req, res, next) => {
-  console.log('COOKIES:', req.cookies)
-  console.log('in startSession', req.body);
   db.connections.Session.findOne({
     where: {
       uid: req.body.id
     }
   }).then((result) => {
-    console.log('in startSession', result);
     if (result !== null) {
-      console.log('NOT NULL');
       db.connections.Session.update({
         createdAt: Date.now(),
         updatedAt: Date.now()
@@ -63,8 +56,6 @@ sessionController.startSession = (req, res, next) => {
     } else {
       db.connections.Session.create({uid: req.body.id}).then((user) => {
         next();
-        // res.status(200);
-        // res.end();
       });
     }
   });

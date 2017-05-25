@@ -43,14 +43,12 @@ class RecipeDisplay extends Component {
       const index = Math.round(Math.random()*count);
       randomIndex[index] = index;
     }
-    console.log(randomIndex);
+    
     const recipes = this.state.recipes.map((curr, i) => {
-      console.log(i);
       if (randomIndex[i]) {
         return (<Recipe recipedata={curr} username={this.props.username} key={i} />)
       }
     });
-
 
     return (
       <div>

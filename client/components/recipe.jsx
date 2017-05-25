@@ -30,7 +30,6 @@ class Recipe extends Component {
   }
 
   render() {
-    console.log(this.state)
 
     let ingredients = this.props.recipedata.recipe.ingredientLines.map((curr, index) => {
       return <li>{curr}</li>
