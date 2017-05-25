@@ -1,6 +1,5 @@
 const request = require('request');
 
-
 const find = (req, res, next) => {
   console.log(req.query)
   const query = req.query;

@@ -16,6 +16,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/public')));
 
+// app.get('/*', sessionController.isLoggedIn)
+
 app.post('/login',  userController.verifyUser,
                     sessionController.startSession,
                     cookieController.setCookie);
@@ -25,10 +27,10 @@ app.post('/signup', userController.checkIfUsernameExists,
                     sessionController.startSession,
                     cookieController.setCookie);
 app.post('/recipeDisplay', recipeController.saveRecipe);
-app.post('/delete', sessionController.isLoggedIn,
-                    recipeController.deleteRecipe);
-app.get('/search', apiController.find);
 
-app.get('/day/:day/:username', dayController.getRowsForDay);//req.params.day /monday/doug
+app.post('/delete', recipeController.deleteRecipe);
+app.get('/search',  apiController.find);
+
+app.get('/day/:day/:username', dayController.getRowsForDay); // req.params.day /monday/doug
 
 app.listen(3000);

@@ -55,14 +55,17 @@ class RecipeDisplay extends Component {
         <h1>Search for a Recipe</h1>
         <form onSubmit={this.handleSearchSubmit}>
           <input
-            placeholder="Search"
+            placeholder="I want some..."
             type="text"
             name="q"
             value={this.state.q}
             onChange={this.handleRecipeChange}
           />
-          <Link to="/search" onClick={this.handleSearchSubmit}>Submit</Link>
+          <br/>
+          <br/>
+          <button><Link id="searchSubmit" to="/search" onClick={this.handleSearchSubmit}>Submit</Link></button>
         </form>
+      <br/>
         {recipes}
       </div>
     );

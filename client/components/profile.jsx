@@ -20,7 +20,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <h1>Profile Page</h1>
+        <h1>Profile</h1>
         {dayComponents}
       </div>
     )

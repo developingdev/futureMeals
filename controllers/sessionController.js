@@ -7,6 +7,8 @@ const sessionController = {};
 *
 *
 */
+
+// TO DO - IS LOGGED IN NEEDS TO CHANGE STATE
 sessionController.isLoggedIn = (req, res, next) => {
   if (req.cookies.futureMeals) {
     db.connections.Session.findOne({
@@ -16,7 +18,7 @@ sessionController.isLoggedIn = (req, res, next) => {
     }).then((result) => {
       if (result !== null) {
         res.status(200);
-        return;
+        res.end();
       } else {
         res.status(400);
         res.end();
