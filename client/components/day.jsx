@@ -26,7 +26,7 @@ class Day extends Component {
 
     return (
       <div>
-        <h4>{this.props.day}</h4>
+        <h4 className="day">{this.props.day}</h4>
         {recipes}
       </div>
     );

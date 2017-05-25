@@ -9,26 +9,26 @@ const sessionController = {};
 */
 
 // TO DO - IS LOGGED IN NEEDS TO CHANGE STATE
-sessionController.isLoggedIn = (req, res, next) => {
-  if (req.cookies.futureMeals) {
-    db.connections.Session.findOne({
-      where: {
-        uid: req.cookies.futureMeals
-      }
-    }).then((result) => {
-      if (result !== null) {
-        res.status(200);
-        res.end();
-      } else {
-        res.status(400);
-        res.end();
-      }
-    });
-  } else {
-    res.status(400);
-    res.end();
-  }
-};
+// sessionController.isLoggedIn = (req, res, next) => {
+//   if (req.cookies.futureMeals) {
+//     db.connections.Session.findOne({
+//       where: {
+//         uid: req.cookies.futureMeals
+//       }
+//     }).then((result) => {
+//       if (result !== null) {
+//         res.status(200);
+//         res.end();
+//       } else {
+//         res.status(400);
+//         res.end();
+//       }
+//     });
+//   } else {
+//     res.status(400);
+//     res.end();
+//   }
+// };
 
 /**
 * startSession - create a new Session and then save the new session to the

@@ -121,7 +121,7 @@ class App extends Component {
                 (<div>
                   <Nav />
                   <div className="jumbotron">
-                    <h1>Future Meals 3.Oh</h1>
+                    <h1 className="title">Future Meals 3.Oh</h1>
                   </div>
                   <Profile
                     username={this.state.username}

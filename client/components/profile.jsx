@@ -20,7 +20,8 @@ class Profile extends Component {
 
     return (
       <div>
-        <h1>Profile</h1>
+        <h1 className="title">Hello {this.props.username}!</h1>
+        <h4>Below is your meal plan for the week:</h4>
         {dayComponents}
       </div>
     )

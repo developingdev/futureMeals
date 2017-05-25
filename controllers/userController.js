@@ -18,7 +18,6 @@ userController.verifyUser = (req, res, next) => {
         username: username
       }
     }).then((result) => {
-
       if (result === []) {
         res.status(400).send('no username found');
         return;
